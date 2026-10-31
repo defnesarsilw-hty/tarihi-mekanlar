@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Detailed historical background, antiquity timeline, and live visiting hours.">
+  <title id="pageTitle">Landmark Details — ChronosSites</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="detail-page-body">
+
+  <!-- Header & Navigation -->
+  <header class="app-header" role="banner">
+    <div class="header-container">
+      <div class="brand">
+        <a href="index.html" class="brand-link" style="text-decoration: none; display: flex; align-items: center; gap: 0.85rem;">
+          <div class="brand-icon" aria-hidden="true">🏛️</div>
+          <div>
+            <h1 class="brand-title">ChronosSites</h1>
+            <p class="brand-subtitle">Historical Landmarks & Antiquity Tracker</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="header-actions">
+        <a href="index.html" class="btn btn-ghost">
+          <span>← Back to Explorer</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Landmark Detail Container -->
+  <main id="main-content" class="app-main detail-container" role="main">
+    
+    <!-- Top Action Bar -->
+    <div class="detail-nav-bar">
+      <a href="index.html" class="btn-back">
+        <span aria-hidden="true">←</span> Return to all historical places
+      </a>
+      <span id="detailBadgeStatus" class="badge-status status-open">
+        <span class="status-pulse" aria-hidden="true"></span>
+        <span id="detailStatusText">Checking live hours...</span>
+      </span>
+    </div>
+
+    <!-- Monument Banner & Title Hero -->
+    <section class="detail-hero-card" id="detailHeroSection">
+      <div class="detail-media-wrap">
+        <img id="detailHeroImg" src="" alt="Historical landmark" class="detail-hero-img">
+        <div class="detail-media-overlay"></div>
+        <div class="detail-hero-text">
+          <div class="detail-tags">
+            <span id="detailEraTag" class="detail-pill pill-gold">Ancient History</span>
+            <span id="detailUnescoTag" class="detail-pill pill-unesco" style="display: none;">🏛️ UNESCO World Heritage</span>
+          </div>
+          <h2 id="detailName" class="detail-title">Loading Monument...</h2>
+          <p id="detailLocation" class="detail-loc">📍 Location</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content Columns -->
+    <div class="detail-layout-grid">
+      
+      <!-- Left Column: In-Depth History & Description -->
+      <article class="detail-main-card">
+        <div class="card-section-header">
+          <span class="section-icon">📜</span>
+          <h3>Historical Overview & Legacy</h3>
+        </div>
+        <p id="detailDescription" class="detail-paragraph">
+          Loading detailed history...
+        </p>
+
+        <div class="card-section-header" style="margin-top: 2rem;">
+          <span class="section-icon">🏛️</span>
+          <h3>Architecture & Construction</h3>
+        </div>
+        <p id="detailArchStyle" class="detail-paragraph" style="color: var(--text-secondary);">
+          Monumental Architecture
+        </p>
+
+        <!-- Map / External Action -->
+        <div class="detail-action-box">
+          <div>
+            <h4>Explore Location</h4>
+            <p>View geographical coordinates and nearby attractions on Google Maps.</p>
+          </div>
+          <a id="detailMapLink" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            🗺️ View on Google Maps
+          </a>
+        </div>
+      </article>
+
+      <!-- Right Column: Metrics, Antiquity & Visiting Hours -->
+      <aside class="detail-sidebar">
+        
+        <!-- Antiquity Widget -->
+        <div class="sidebar-box">
+          <div class="card-section-header">
+            <span class="section-icon">⏳</span>
+            <h3>Antiquity & Age</h3>
+          </div>
+          <div class="sidebar-stat-highlight">
+            <span id="detailAgeYears" class="highlight-number">--</span>
+            <span class="highlight-sub">Relative to Year <span id="currentYearDisplay"></span></span>
+          </div>
+
+          <div class="key-value-list">
+            <div class="key-value-row">
+              <span class="kv-label">Year of Construction</span>
+              <span id="detailBuiltYear" class="kv-value">--</span>
+            </div>
+            <div class="key-value-row">
+              <span class="kv-label">Historical Era</span>
+              <span id="detailEra" class="kv-value">--</span>
+            </div>
+            <div class="key-value-row">
+              <span class="kv-label">Chronological Century</span>
+              <span id="detailCentury" class="kv-value">--</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visiting Hours & Logistics Widget -->
+        <div class="sidebar-box">
+          <div class="card-section-header">
+            <span class="section-icon">🕒</span>
+            <h3>Visiting Hours & Tickets</h3>
+          </div>
+          
+          <div class="key-value-list">
+            <div class="key-value-row">
+              <span class="kv-label">Daily Visiting Schedule</span>
+              <span id="detailHours" class="kv-value">--</span>
+            </div>
+            <div class="key-value-row">
+              <span class="kv-label">Site Timezone</span>
+              <span id="detailTimezone" class="kv-value">--</span>
+            </div>
+            <div class="key-value-row">
+              <span class="kv-label">Standard Admission</span>
+              <span id="detailPrice" class="kv-value" style="color: var(--accent-gold);">--</span>
+            </div>
+            <div class="key-value-row">
+              <span class="kv-label">Current Notice</span>
+              <span id="detailLiveNotice" class="kv-value" style="font-size: 0.82rem; font-weight: normal; color: var(--text-secondary);">--</span>
+            </div>
+          </div>
+        </div>
+
+      </aside>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="app-footer" role="contentinfo">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <span class="footer-logo">🏛️ ChronosSites</span>
+        <p>Preserving humanity's legacy through data, historical context, and living time.</p>
+      </div>
+      <div class="footer-meta">
+        <p><a href="index.html" style="color: var(--accent-gold); text-decoration: none;">← Back to Home Page</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script for Detail Page -->
+  <script src="detail.js"></script>
+</body>
+</html>
+

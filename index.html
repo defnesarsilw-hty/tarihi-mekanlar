@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore world-famous historical sites, track their opening and closing hours in real-time, and discover how ancient they truly are.">
+  <title>ChronosSites — Historical Sites Info & Age Tracker</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header & Navigation -->
+  <header class="app-header" role="banner">
+    <div class="header-container">
+      <div class="brand">
+        <div class="brand-icon" aria-hidden="true">🏛️</div>
+        <div>
+          <h1 class="brand-title">ChronosSites</h1>
+          <p class="brand-subtitle">Historical Landmarks & Antiquity Tracker</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button id="themeToggleBtn" class="btn btn-ghost" aria-label="Toggle light or dark theme" title="Toggle theme">
+          <span class="theme-icon" aria-hidden="true">☀️</span>
+          <span class="theme-label">Light Mode</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <main id="main-content" class="app-main" role="main">
+    
+    <!-- Hero / Metrics Section -->
+    <section class="hero-section" aria-labelledby="hero-heading">
+      <div class="hero-content">
+        <span class="hero-badge">Timeless Heritage Explorer</span>
+        <h2 id="hero-heading" class="hero-title">Journey Through Millennia of Human Civilization</h2>
+        <p class="hero-description">
+          Monitor real-time visitor hours, verify whether sites are currently open, and unveil exactly how old world wonders are relative to our present year.
+        </p>
+
+        <!-- Dynamic Live Statistics -->
+        <div class="stats-ribbon" role="region" aria-label="Key Site Statistics">
+          <div class="stat-card">
+            <span class="stat-value" id="statTotalSites">--</span>
+            <span class="stat-label">Total Landmarks</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value" id="statOldestSite">--</span>
+            <span class="stat-label">Oldest Monument</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value stat-live" id="statOpenSites">--</span>
+            <span class="stat-label">Open Right Now</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Filters & Controls Toolbar -->
+    <section class="controls-section" aria-label="Search and Filter Controls">
+      <div class="controls-panel">
+        
+        <!-- Search Field with Submit Button -->
+        <div class="control-group search-group">
+          <label for="searchInput" class="control-label">Search Historical Sites</label>
+          <form id="searchForm" class="search-form" role="search" onsubmit="return false;">
+            <div class="input-with-icon">
+              <span class="input-icon" aria-hidden="true">🔍</span>
+              <input 
+                type="search" 
+                id="searchInput" 
+                placeholder="Search by monument, city, or country..." 
+                autocomplete="off"
+              >
+            </div>
+            <button id="searchBtn" type="submit" class="btn btn-search" aria-label="Perform search">
+              <span aria-hidden="true">🔍</span>
+              <span>Search</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Filter: Historical Era -->
+        <div class="control-group">
+          <label for="eraFilter" class="control-label">Historical Era</label>
+          <select id="eraFilter" class="select-control">
+            <option value="all">All Historical Eras</option>
+            <option value="Ancient History">Ancient History (>3000 yrs)</option>
+            <option value="Classical Antiquity">Classical Antiquity</option>
+            <option value="Early Medieval">Early Medieval</option>
+            <option value="High Medieval">High Medieval</option>
+            <option value="Pre-Columbian">Pre-Columbian</option>
+            <option value="Early Modern">Early Modern</option>
+            <option value="Modern Era">Modern Era</option>
+          </select>
+        </div>
+
+        <!-- Filter: Country / Location -->
+        <div class="control-group">
+          <label for="countryFilter" class="control-label">Location</label>
+          <select id="countryFilter" class="select-control">
+            <option value="all">All Locations</option>
+          </select>
+        </div>
+
+        <!-- Sort Option -->
+        <div class="control-group">
+          <label for="sortSelect" class="control-label">Sort Order</label>
+          <select id="sortSelect" class="select-control">
+            <option value="oldest">Oldest First (Most Ancient)</option>
+            <option value="newest">Newest First</option>
+            <option value="name-asc">Name (A to Z)</option>
+            <option value="status">Open Status (Open First)</option>
+          </select>
+        </div>
+
+        <!-- Live Toggle: Open Now Only -->
+        <div class="control-group toggle-group">
+          <label class="toggle-switch" for="openNowToggle">
+            <input type="checkbox" id="openNowToggle">
+            <span class="slider" aria-hidden="true"></span>
+            <span class="toggle-label">Only Open Now</span>
+          </label>
+        </div>
+
+      </div>
+
+      <!-- Active Filter Summary -->
+      <div class="results-meta" aria-live="polite">
+        <span id="resultsCount">Loading landmarks...</span>
+        <button id="resetFiltersBtn" class="btn-link" style="display: none;">Reset all filters</button>
+      </div>
+    </section>
+
+    <!-- Landmarks Grid Section -->
+    <section class="landmarks-section" aria-label="Historical landmarks list">
+      <div id="sitesGrid" class="sites-grid" aria-busy="true">
+        <!-- Rendered dynamically by JavaScript -->
+      </div>
+
+      <!-- Empty State -->
+      <div id="emptyState" class="empty-state" style="display: none;" role="status">
+        <div class="empty-icon" aria-hidden="true">🧭</div>
+        <h3>No Historical Sites Found</h3>
+        <p>No monuments match your current search and filter combination.</p>
+        <button id="emptyResetBtn" class="btn btn-primary">Clear Filters</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Detailed Landmark Modal Dialog -->
+  <dialog id="siteDetailModal" class="site-modal" aria-labelledby="modalTitle">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-container" role="document">
+      <button id="modalCloseBtn" class="modal-close-btn" aria-label="Close details dialog">✕</button>
+      <div id="modalBody" class="modal-body">
+        <!-- Content injected dynamically by JS -->
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Footer -->
+  <footer class="app-footer" role="contentinfo">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <span class="footer-logo">🏛️ ChronosSites</span>
+        <p>Preserving humanity's legacy through data, historical context, and living time.</p>
+      </div>
+      <div class="footer-meta">
+        <p>Built with semantic HTML5, CSS3 & Modern Vanilla JS.</p>
+        <p class="copyright">&copy; <span id="currentYear"></span> ChronosSites Project. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Application Script -->
+  <script src="app.js"></script>
+</body>
+</html>
+
